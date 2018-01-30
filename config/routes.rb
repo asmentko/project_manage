@@ -6,5 +6,7 @@ Rails.application.routes.draw do
         patch :complete
       end
     end
-  end
+  end 
+
+  root "projects#index"
 end
