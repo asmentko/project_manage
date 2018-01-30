@@ -2,8 +2,17 @@ class TasksController < ApplicationController
   before_action :set_project
 
   def create
-    @task = @project.task.create(task_params)
+    @task = @project.tasks.create(task_params)
+    redirect_to @project
+  end
 
+  def destroy
+    @task = @project.tasks.find(params[:id])
+    if @task.destroy
+      flash[:success] = "Task was deleted"
+    else
+      flash[:error] = "Task was not deleted"
+    end
     redirect_to @project
   end
 
@@ -14,7 +23,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params[:task].permit(:content))
+    params[:task].permit(:content)
   end
 
 end
